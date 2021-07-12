@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38B9BDDA2698235E006AF150 /* VKAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B9BDD92698235E006AF150 /* VKAuthService.swift */; };
+		38B9BDDF26983F7A006AF150 /* ContetntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B9BDDD26983E89006AF150 /* ContetntView.swift */; };
 		38EB8A8E2694467400F720A3 /* ios_client_server_1347App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EB8A8D2694467400F720A3 /* ios_client_server_1347App.swift */; };
-		38EB8A902694467400F720A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EB8A8F2694467400F720A3 /* ContentView.swift */; };
+		38EB8A902694467400F720A3 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EB8A8F2694467400F720A3 /* AuthView.swift */; };
 		38EB8A922694467500F720A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38EB8A912694467500F720A3 /* Assets.xcassets */; };
 		38EB8A952694467500F720A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38EB8A942694467500F720A3 /* Preview Assets.xcassets */; };
 		38EB8AA02694467500F720A3 /* ios_client_server_1347Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EB8A9F2694467500F720A3 /* ios_client_server_1347Tests.swift */; };
@@ -40,9 +42,11 @@
 		0D71CA50329A5412222948A2 /* Pods-ios-client-server-1347.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-client-server-1347.debug.xcconfig"; path = "Target Support Files/Pods-ios-client-server-1347/Pods-ios-client-server-1347.debug.xcconfig"; sourceTree = "<group>"; };
 		245894E41B4DFAF67BAD8EF6 /* Pods-ios-client-server-1347Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-client-server-1347Tests.release.xcconfig"; path = "Target Support Files/Pods-ios-client-server-1347Tests/Pods-ios-client-server-1347Tests.release.xcconfig"; sourceTree = "<group>"; };
 		35240341BE6A7121C5A06C9D /* Pods-ios-client-server-1347.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-client-server-1347.release.xcconfig"; path = "Target Support Files/Pods-ios-client-server-1347/Pods-ios-client-server-1347.release.xcconfig"; sourceTree = "<group>"; };
+		38B9BDD92698235E006AF150 /* VKAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAuthService.swift; sourceTree = "<group>"; };
+		38B9BDDD26983E89006AF150 /* ContetntView.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = ContetntView.swift; sourceTree = "<group>"; };
 		38EB8A8A2694467400F720A3 /* ios-client-server-1347.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-client-server-1347.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38EB8A8D2694467400F720A3 /* ios_client_server_1347App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_client_server_1347App.swift; sourceTree = "<group>"; };
-		38EB8A8F2694467400F720A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		38EB8A8F2694467400F720A3 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		38EB8A912694467500F720A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38EB8A942694467500F720A3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		38EB8A962694467500F720A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,14 +103,14 @@
 				74475350E45278928942210D /* Pods-ios-client-server-1347Tests.debug.xcconfig */,
 				245894E41B4DFAF67BAD8EF6 /* Pods-ios-client-server-1347Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		38BF3B0B269775E600A20496 /* dz2 */ = {
 			isa = PBXGroup;
 			children = (
-				38EB8A8F2694467400F720A3 /* ContentView.swift */,
+				38B9BDD92698235E006AF150 /* VKAuthService.swift */,
+				38EB8A8F2694467400F720A3 /* AuthView.swift */,
 			);
 			path = dz2;
 			sourceTree = "<group>";
@@ -139,6 +143,7 @@
 				38BF3B0B269775E600A20496 /* dz2 */,
 				38EB8ABB269453EB00F720A3 /* dz1 */,
 				38EB8A8D2694467400F720A3 /* ios_client_server_1347App.swift */,
+				38B9BDDD26983E89006AF150 /* ContetntView.swift */,
 				38EB8ABA2694538500F720A3 /* Resources */,
 			);
 			path = "ios-client-server-1347";
@@ -435,8 +440,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38EB8A902694467400F720A3 /* ContentView.swift in Sources */,
+				38B9BDDF26983F7A006AF150 /* ContetntView.swift in Sources */,
+				38EB8A902694467400F720A3 /* AuthView.swift in Sources */,
 				38EB8AB92694527D00F720A3 /* SingletonModel.swift in Sources */,
+				38B9BDDA2698235E006AF150 /* VKAuthService.swift in Sources */,
 				38EB8A8E2694467400F720A3 /* ios_client_server_1347App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
