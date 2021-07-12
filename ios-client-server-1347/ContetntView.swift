@@ -12,33 +12,30 @@ import Alamofire
 struct ContentView: View {
     
     @State var IdClient: String = ""
-    @State var isVisibleClientId = 1 - Double(Session.session.authorized)
-    @State var isVisibleAuth = Double(Session.session.authorized)
     @State var resultstring: String = ""
     @State var PhotoCount: String = "20"
     @State var PhotoOffset: String = "0"
     @State var SearchGr: String = ""
-
+    
+    @State private var isPresentedAuthView = false
+    
     var body: some View {
         NavigationView{
             GeometryReader{ geometry in
                 VStack{
-                    Text("Client ID:").opacity(isVisibleClientId)
-                    TextField("Client_ID", text: $IdClient).padding().opacity(isVisibleClientId)
+                    HStack{
+                        Text(Session.session.caption)
+                        TextField("Client_ID", text: $IdClient).padding().opacity(1 - Double(Session.session.authorized))
+                    }
                     Button(action: {
                         Session.session.client_id = IdClient
-                        isVisibleClientId = 0
-                        isVisibleAuth = 1 - Double(Session.session.authorized)
+                        self.isPresentedAuthView.toggle()
                     }, label: {
-                        Text("Submit client ID")
-                    }).opacity(isVisibleClientId)
-                    NavigationLink(
-                        destination: AuthView(),
-                        label: {
-                            
-                            Text("Open authorization dialog")
-                        }
-                    ).frame(width: geometry.size.width, height: 40).accentColor(.gray).opacity(isVisibleAuth)
+                        Text("Open authorization dialog")
+                    }).sheet(isPresented: self.$isPresentedAuthView, content: {
+                        AuthView()
+                    })
+                    .opacity(1 - Double(Session.session.authorized))
                     Divider()
                     
                     Button(action: {
@@ -54,17 +51,17 @@ struct ContentView: View {
                     }).padding()
                     
                     HStack{
-                    Button(action: {
-                        let url = VKAPIService(Session.session.userId, Session.session.token).requestPhotos(count: Int(PhotoCount)!, offset: Int(PhotoOffset)!)
-                        //AF.request(url).responseJSON
-                        AF.request(url).responseString { response in
-                            guard let res = response.value else {return}
-                            resultstring = res
-                            print(res)
-                        }
-                    }, label: {
-                        Text("Photos:")
-                    }).padding()
+                        Button(action: {
+                            let url = VKAPIService(Session.session.userId, Session.session.token).requestPhotos(count: Int(PhotoCount)!, offset: Int(PhotoOffset)!)
+                            //AF.request(url).responseJSON
+                            AF.request(url).responseString { response in
+                                guard let res = response.value else {return}
+                                resultstring = res
+                                print(res)
+                            }
+                        }, label: {
+                            Text("Photos:")
+                        }).padding()
                         TextField("Count:", text: $PhotoCount).padding()
                         TextField("Offset:", text: $PhotoOffset).padding()
                     }
@@ -81,17 +78,17 @@ struct ContentView: View {
                     })
                     HStack{
                         TextField("Search string", text: $SearchGr).padding()
-                    Button(action: {
-                        let url = VKAPIService(Session.session.userId, Session.session.token).requestSearchGroups(SearchGr)
-                        //AF.request(url).responseJSON
-                        AF.request(url).responseString { response in
-                            guard let res = response.value else {return}
-                            resultstring = res
-                            print(res)
-                        }
-                    }, label: {
-                        Text("Search Groups")
-                    }).padding()
+                        Button(action: {
+                            let url = VKAPIService(Session.session.userId, Session.session.token).requestSearchGroups(SearchGr)
+                            //AF.request(url).responseJSON
+                            AF.request(url).responseString { response in
+                                guard let res = response.value else {return}
+                                resultstring = res
+                                print(res)
+                            }
+                        }, label: {
+                            Text("Search Groups")
+                        }).padding()
                     }
                     //Divider()
                     

@@ -16,6 +16,6 @@ final class Session {
     var token: String = "для хранения токена в VK"
     var userId: Int = 0
     var authorized = 0
-    
+    var caption = "Client id:"
     
 }

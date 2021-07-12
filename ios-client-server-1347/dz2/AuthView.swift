@@ -15,12 +15,13 @@ struct WebView : UIViewRepresentable  {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     func makeUIView(context: Context) -> WKWebView  {
-        //let vc = ViewController()
         let ww = WKWebView()
-        //ww.navigationDelegate = vc
         return ww
     }
     func updateUIView(_ uiView: WKWebView, context: Context) {
+        if Session.session.authorized == 1 {
+            self.presentationMode.wrappedValue.dismiss()
+        }
         uiView.navigationDelegate = context.coordinator
         uiView.load(self.request)
     }
@@ -65,6 +66,7 @@ struct WebView : UIViewRepresentable  {
             Session.session.userId = Int(userid)!
             Session.session.token = token
             Session.session.authorized = 1
+            Session.session.caption = "Authorized."
             decisionHandler(.cancel)
             
             parent.presentationMode.wrappedValue.dismiss()
