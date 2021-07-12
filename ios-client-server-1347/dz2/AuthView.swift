@@ -9,8 +9,10 @@ import SwiftUI
 import WebKit
 
 
-struct WebView : UIViewRepresentable {
+struct WebView : UIViewRepresentable  {
     let request: URLRequest
+
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     func makeUIView(context: Context) -> WKWebView  {
         //let vc = ViewController()
@@ -24,15 +26,15 @@ struct WebView : UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator() //self)
+        Coordinator(self)
     }
     
     class Coordinator: NSObject, WKNavigationDelegate {
-//        var parent: WebView
-//
-//        init(_ parent: WebView) {
-//            self.parent = parent
-//        }
+        var parent: WebView
+
+        init(_ parent: WebView) {
+            self.parent = parent
+        }
         
         // Delegate methods go here
         func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
@@ -64,6 +66,9 @@ struct WebView : UIViewRepresentable {
             Session.session.token = token
             Session.session.authorized = 1
             decisionHandler(.cancel)
+            
+            parent.presentationMode.wrappedValue.dismiss()
+            
         }
         // alert functionality goes here
     }
@@ -72,6 +77,7 @@ struct WebView : UIViewRepresentable {
 
 
 struct AuthView: View {
+    
     var body: some View {
         
         let request = VKAuthService(Session.session.client_id).request()
