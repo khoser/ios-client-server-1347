@@ -14,6 +14,9 @@ struct WebView : UIViewRepresentable  {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @Binding var Authorized: Int
+    @Binding var Caption: String
+    
     func makeUIView(context: Context) -> WKWebView  {
         let ww = WKWebView()
         return ww
@@ -31,8 +34,9 @@ struct WebView : UIViewRepresentable  {
     }
     
     class Coordinator: NSObject, WKNavigationDelegate {
+        
         var parent: WebView
-
+        
         init(_ parent: WebView) {
             self.parent = parent
         }
@@ -65,8 +69,8 @@ struct WebView : UIViewRepresentable  {
             
             Session.session.userId = Int(userid)!
             Session.session.token = token
-            Session.session.authorized = 1
-            Session.session.caption = "Authorized."
+            parent.Authorized = 1
+            parent.Caption = "Authorized."
             decisionHandler(.cancel)
             
             parent.presentationMode.wrappedValue.dismiss()
@@ -79,17 +83,12 @@ struct WebView : UIViewRepresentable  {
 
 
 struct AuthView: View {
-    
+    @Binding var Authorized: Int
+    @Binding var Caption: String
+
     var body: some View {
-        
         let request = VKAuthService(Session.session.client_id).request()
-        
-        WebView( request: request)
+        WebView( request: request, Authorized: $Authorized, Caption: $Caption)
     }
 }
 
-struct AuthView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthView()
-    }
-}

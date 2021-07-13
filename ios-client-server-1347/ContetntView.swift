@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import Alamofire
+import Combine
 
 struct ContentView: View {
     
@@ -19,13 +20,15 @@ struct ContentView: View {
     
     @State private var isPresentedAuthView = false
     
+    @ObservedObject var authModel = AuthModel()
+    
     var body: some View {
         NavigationView{
             GeometryReader{ geometry in
                 VStack{
                     HStack{
-                        Text(Session.session.caption)
-                        TextField("Client_ID", text: $IdClient).padding().opacity(1 - Double(Session.session.authorized))
+                        Text("\(authModel.caption)")
+                        TextField("Client_ID", text: $IdClient).padding().opacity(1 - Double(authModel.authorized))
                     }
                     Button(action: {
                         Session.session.client_id = IdClient
@@ -33,9 +36,9 @@ struct ContentView: View {
                     }, label: {
                         Text("Open authorization dialog")
                     }).sheet(isPresented: self.$isPresentedAuthView, content: {
-                        AuthView()
+                        AuthView(Authorized: $authModel.authorized, Caption: $authModel.caption)
                     })
-                    .opacity(1 - Double(Session.session.authorized))
+                    .opacity(1 - Double(authModel.authorized))
                     Divider()
                     
                     Button(action: {
