@@ -12,7 +12,10 @@ final class Session {
     
     static let session = Session()
     
+    var client_id: String = ""
     var token: String = "для хранения токена в VK"
     var userId: Int = 0
+    var authorized = 0
+    var caption = "Client id:"
     
 }
